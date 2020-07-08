@@ -1,0 +1,15 @@
+{% extends "base.html"%}
+{%block title%} Graphs Page {%endblock%}
+{%block content%}
+
+{#<p> {{graph}} </p>#}
+{#<img src={{ graph }} alt="Chart" height="42" width="42">#}
+
+    <h1>{{ status }}</h1>
+    {{ fig }}  %}
+
+    {% for inAday in result %}
+        {{ inAday['Date'] }} : {{ inAday['Cases'] }}
+    {% endfor %}
+
+{%endblock%}

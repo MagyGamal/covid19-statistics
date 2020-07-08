@@ -1,0 +1,214 @@
+{% extends "base.html"%}
+{% block title %} Covid-19 Statistics.
+{% endblock %}
+{% block content %}
+
+<style>
+body {
+  background-image: url('../static/img.jpg');
+  color:white;
+}
+select{
+  width:150px;
+}
+h1 {
+    display: inline-flex;
+  background-color: #9370DB;
+  border-radius: 10px;
+}
+
+option {
+    {
+ border-radius:5px;
+ background-color:#00BFFF;
+}
+}
+label
+{
+    display: block-flex;
+  background-color: #1E90FF;
+  border-radius: 6px;
+  height: 33px;
+}
+h2 {
+  background-color: #9370DB;
+  display: inline-flex;
+  border-radius: 5px;
+}
+
+
+ 
+input[type=submit] {
+  width: 10%;
+  background-color: #1E90FF;
+  color: white;
+  padding: 2px 3px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 4px;}
+  cursor: pointer;
+ div {outline-style: dotted;}
+ 
+</style>
+<h1> COVID-19 STATISTICS </h1>
+<br>
+<br>
+
+<br>
+<h2 style="text-align:center" >Country statistics </h2>
+<div  >
+
+<form action="/" method="GET">
+
+  <span>
+    <label for="country">
+        <p style="font-size:20px"> </p>
+
+          </label>
+  <select id="country" name="country">
+  <option value="">Country</option>
+
+    {% for country in countries %}
+      <option small scale value="{{ country['Slug'] }}">
+        {{ country['Country'] }}
+      </option>
+    {% endfor %}
+
+  </select>
+    {% if errorMessage['country'] == '' %}
+      <span style="background: red"> Please choose one </span>
+    {% endif %}
+  </span>
+  <br>
+
+  <span>
+    <label for="status"><p style="font-size:20px"> </p></label>
+  <select id="status" name="status">
+  <option value="">STATUS</option>
+
+    <option value="confirmed">Total cases</option>
+    <option value="recovered">Total recovered cases</option>
+    <option value="deaths">Total deaths</option>
+  </select>
+
+    {% if errorMessage['status'] == '' %}
+      <span style="background: red"> Please choose one </span>
+    {% endif %}
+  </span>
+
+  <span>
+    <br>
+     <label for="Graph type"><p style="font-size:20px"></p></label>
+      <select id="graph" name="graph">
+      <option value="">GRAPH TYPE</option>
+      <option value="Line">Continous Line</option>
+      <option value="Bars">Bars</option>
+      </select>
+    {% if errorMessage['graph'] == '' %}
+      <span style="background: red"> Please choose one </span>
+    {% endif %}
+  </span>
+
+
+  <input type="submit" value="SHOW GRAPH">
+
+</form>
+</div>
+<br>
+<br>
+<br>
+<h2 style="text-align:center" >Virus Basic Reproduction Number R For a Specific Country </h2>
+<div  >
+<form action="/" method="GET">
+
+  <span>
+    <label for="country_chart">
+    <p style="font-size:20px"> </p>
+  </label>
+  <select id="country_chart" name="country_chart">
+    <option value="">COUNTRY</option>
+    <option value="World">World</option>
+    {% for country in countries %}
+      <option value="{{ country['Country'] }}">
+        {{ country['Country'] }}
+      </option>
+    {% endfor %}
+  </select>
+  {% if errorMessage['country_chart'] == '' %}
+    <span style="background: red"> Please choose one </span>
+  {% endif %}
+  </span>
+  
+
+  <input name="chart" type="hidden" value="R">
+  <input type="submit" value="SHOW (R) ">
+
+</form>
+</div>
+<br>
+<br>
+<br>
+
+<h2 style="text-align:center" >Compare statistics between two countries </h2>
+<div>
+
+<form action="/" method="GET">
+
+  <span>
+
+      <select id="country_2" name="country_2">
+      <option value="">COUNTRY (1) </option>
+
+          {% for country in countries %}
+      <option value="{{ country['Slug'] }}">
+        {{ country['Country'] }}
+      </option>
+    {% endfor %}
+      </select>
+
+      {% if errorMessage['country_2'] == '' %}
+      <span style="background: red" display:inline-block> Please choose one </span>
+      {% endif %}
+  </span>
+
+  <span>
+    <label for="country_1"><p style="font-size:20px"></p></label>
+
+    <select id="country_1" name="country_1">
+
+      <option value="">COUNTRY (2) </option>
+      {% for country in countries %}
+        <option value="{{ country['Slug'] }}">
+          {{ country['Country'] }}
+        </option>
+      {% endfor %}
+    </select>
+
+    {% if errorMessage['counrty_1'] == '' %}
+      <span style="background: red" display:inline-block> Please choose one </span>
+    {% endif %}
+  </span>
+{#  <bar>#}
+
+  <span>
+    <br>
+ <label for="status_2"><p style="font-size:20px"></p></label>
+  <select id="status_2" name="status_2">
+  <option value="">STATUS</option>
+
+    <option value="confirmed">Total cases</option>
+    <option value="recovered">Total recovered cases</option>
+    <option value="deaths">Total deaths</option>
+  </select>
+
+    {% if errorMessage['status_2'] == '' %}
+      <span style="background: red"> Please choose one </span>
+    {% endif %}
+  </span>
+
+  <input type="submit" value="SHOW GRAPH">
+</form>
+</div>
+
+
+{% endblock %}
